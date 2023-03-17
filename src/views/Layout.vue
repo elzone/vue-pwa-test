@@ -12,11 +12,37 @@
         <router-view></router-view>
       </div>
     </div>
+    <install-p-w-a v-if="appInBrowser" />
   </div>
 </template>
 
-<script lang="coffee">
+<script>
+  import InstallPWA from '../components/InstallPWA'
+
   export default {
-    
+    components: {
+      InstallPWA
+    },
+    data () {
+      return {
+        appInBrowser: false
+      }
+    },
+    beforeMount () {
+      this.appInBrowser = this.getPWADisplayMode() !== 'standalone';
+      console.log(this.appInBrowser);
+    },
+
+    methods: {
+      getPWADisplayMode: () => {
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        if (document.referrer.startsWith('android-app://')) {
+          return 'twa';
+        } else if (navigator.standalone || isStandalone) {
+          return 'standalone';
+        }
+        return 'browser';
+      }
+    }
   }
 </script>

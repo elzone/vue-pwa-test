@@ -12,7 +12,7 @@
         <router-view></router-view>
       </div>
     </div>
-    <install-p-w-a v-if="appInBrowser" />
+<!--    <install-p-w-a v-if="appInBrowser" />-->
   </div>
 </template>
 
@@ -23,7 +23,7 @@
     components: {
       InstallPWA
     },
-    data () {
+    /*data () {
       return {
         appInBrowser: false
       }
@@ -31,7 +31,7 @@
     beforeMount () {
       this.appInBrowser = this.getPWADisplayMode() !== 'standalone';
       console.log(this.appInBrowser);
-    },
+    },*/
 
     methods: {
       getPWADisplayMode: () => {
